@@ -38,8 +38,9 @@ router.post("/", async (req, res, next) => {
   }
 
   const newCity = new cityModel({
-    cityName: req.body.cityName,
-    country: req.body.country
+    cityName: cityName,
+    country: country,
+    imageUrl: imageUrl
   });
 
   newCity
