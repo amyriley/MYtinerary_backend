@@ -8,6 +8,8 @@ const db = require("./keys").mongoURI;
 
 const mongoose = require("mongoose");
 
+const passport = require("passport");
+
 mongoose
   .connect(db, { useNewUrlParser: true, useCreateIndex: true })
   .then(() => console.log("Connection to Mongo DB established"))
@@ -27,6 +29,7 @@ app.listen(port, () => {
   console.log("Server is running on " + port + "port");
 });
 
-app.use("/cities", require("./routes/cities"));
+app.use(passport.initialize());
 
+app.use("/cities", require("./routes/cities"));
 app.use("/users", require("./routes/users"));

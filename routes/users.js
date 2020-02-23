@@ -10,6 +10,7 @@ const saltRounds = 10;
 
 const key = require("../keys");
 const jwt = require("jsonwebtoken");
+const passport = require("../passport");
 
 router.post(
   "/register",
@@ -117,6 +118,19 @@ router.post(
         }
       });
     }
+  }
+);
+
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    userModel
+      .findOne({ _id: req.user.id })
+      .then(user => {
+        res.json(user);
+      })
+      .catch(err => res.status(404).json({ error: "User does not exist!" }));
   }
 );
 
