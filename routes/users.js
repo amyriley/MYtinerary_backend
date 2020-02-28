@@ -10,7 +10,7 @@ const saltRounds = 10;
 
 const key = require("../keys");
 const jwt = require("jsonwebtoken");
-const passport = require("../passport");
+const passport = require("passport");
 
 router.post(
   "/register",
@@ -131,6 +131,21 @@ router.get(
         res.json(user);
       })
       .catch(err => res.status(404).json({ error: "User does not exist!" }));
+  }
+);
+
+router.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"]
+  })
+);
+
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/", session: false }),
+  function(req, res) {
+    res.redirect("http://localhost:3000/");
   }
 );
 

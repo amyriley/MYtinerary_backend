@@ -9,6 +9,7 @@ const db = require("./keys").mongoURI;
 const mongoose = require("mongoose");
 
 const passport = require("passport");
+require("./passport")(passport);
 
 mongoose
   .connect(db, { useNewUrlParser: true, useCreateIndex: true })
@@ -31,5 +32,5 @@ app.listen(port, () => {
 
 app.use(passport.initialize());
 
-app.use("/cities", require("./routes/cities"));
-app.use("/users", require("./routes/users"));
+app.use("/api/cities", require("./routes/cities"));
+app.use("/api/users", require("./routes/users"));

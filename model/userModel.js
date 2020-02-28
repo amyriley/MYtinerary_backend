@@ -5,9 +5,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  authWithGoogle: {
+    type: Boolean
+  },
   password: {
-    type: String,
-    required: true
+    type: String
+    // required: true
   },
   profilePicture: {
     type: String
